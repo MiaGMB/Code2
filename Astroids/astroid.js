@@ -2,9 +2,12 @@
 var L09_Asteroids;
 (function (L09_Asteroids) {
     class Asteroid {
-        constructor(_size) {
+        constructor(_size, _position) {
             console.log("Asteroid constructor");
-            this.position = new L09_Asteroids.Vector(0, 0);
+            if (_position)
+                this.position = _position;
+            else
+                this.position = new L09_Asteroids.Vector(0, 0);
             this.velocity = new L09_Asteroids.Vector(0, 0);
             this.velocity.random(100, 200);
             this.type = Math.floor(Math.random() * 4);
@@ -32,6 +35,11 @@ var L09_Asteroids;
             L09_Asteroids.crc2.translate(-50, -50);
             L09_Asteroids.crc2.stroke(L09_Asteroids.asteroidPaths[this.type]);
             L09_Asteroids.crc2.restore();
+        }
+        isHit(_hotspot) {
+            let hitsize = 50 * this.size;
+            let difference = new L09_Asteroids.Vector(_hotspot.x - this.position.x, _hotspot.y - this.position.y);
+            return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize);
         }
     }
     L09_Asteroids.Asteroid = Asteroid;

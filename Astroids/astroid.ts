@@ -6,9 +6,13 @@ namespace L09_Asteroids {
          type: number;
         size: number;
 
-        constructor(_size: number) {
+        constructor(_size: number, _position?: Vector) {
             console.log("Asteroid constructor");
-            this.position = new Vector(0, 0);
+            if (_position)
+                this.position = _position;
+            else
+                this.position = new Vector(0, 0);
+            
             this.velocity = new Vector(0, 0);
             this.velocity.random(100, 200);
 
@@ -43,5 +47,11 @@ namespace L09_Asteroids {
         crc2.restore();
         }
 
+
+        isHit(_hotspot: Vector): boolean {
+            let hitsize: number = 50 * this.size;
+            let difference: Vector = new Vector(_hotspot.x - this.position.x, _hotspot.y - this.position.y) 
+            return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize)
+        }
     }
 }
