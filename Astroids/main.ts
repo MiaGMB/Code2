@@ -22,11 +22,27 @@ namespace L09_Asteroids {
         //createShip();
 
         // canvas.addEventListener("mousedown", loadLaser);
-        // canvas.addEventListener("mouseup" shootLaser);
+        canvas.addEventListener("mouseup" shootLaser);
         // canvas.addEventListener("keypress" handleKeypress);
         // canvas.addEventListener("mousemove" setHeading);
 
         window.setInterval(upadte, 20)
+
+        function shootLaser(_event: MouseEvent): void {
+            console.log("Shoot laser");
+            let hotspot: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
+            let asteroidHit: Asteroid | null = getAsteroidHit(hotspot);
+            if (asteroidHit) 
+                breakAsteroid(asteroidHit);
+        }
+
+        function getAsteroidHit(_hotspot: Vector): Asteroid | null {
+            for (let asteroid of asteroids) {
+                if (asteroid.isHit(_hotspot))
+                    return asteroid;
+            }
+            return null
+        }
 
         function createAsteroids(_nAsteroids: number): void {
             console.log("Create asteroids");
@@ -36,12 +52,12 @@ namespace L09_Asteroids {
             }
         }
 
-        function upadte(): void{
+        function upadte(): void {
             console.log("Update");
             crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
             for (let asteroid of asteroids) {
-                asteroid.moveBy(1/ 50);
+                asteroid.moveBy(1 / 50);
                 asteroid.draw();
             }
 
