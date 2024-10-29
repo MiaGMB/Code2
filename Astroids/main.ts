@@ -32,12 +32,25 @@ namespace L09_Asteroids {
             console.log("Create asteroids");
             for (let i: number = 0; i < _nAsteroids; i++) {
                 let asteroid: Asteroid = new Asteroid(1.0);
+                asteroids.push(asteroid);
             }
         }
+
+        function upadte(): void{
+            console.log("Update");
+            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+
+            for (let asteroid of asteroids) {
+                asteroid.moveBy(1/ 50);
+                asteroid.draw();
+            }
+
+            //ship.draw();
+            //handleCollision();
+        }
+
+
         let asteroid: Asteroid = new Asteroid(1)
         console.log(asteroid);
-
-        asteroid.draw();
-        asteroid.moveBy(0.1);
     }
 }
