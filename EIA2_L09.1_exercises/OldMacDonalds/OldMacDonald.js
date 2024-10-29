@@ -42,4 +42,3 @@ for (let index = 0; index < stable.length; index++) {
     animal.eat();
     animal.sing();
 }
-//# sourceMappingURL=OldMacDonald.js.map

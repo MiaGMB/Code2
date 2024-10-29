@@ -12,4 +12,3 @@ class Vector {
 const v1 = new Vector();
 v1.scale(2);
 console.log(v1);
-//# sourceMappingURL=EIA2_L09.1.js.map

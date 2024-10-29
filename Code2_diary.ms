@@ -58,3 +58,7 @@ Trough his help i could fininish the tasc. But i still noticed that i have probl
 28.10.24 code2 day6
 Today i started the Astreoid task, made the Diagrams following jirkas videos and started implementing the code,
 also trough the help of his videos. I also catched up my diary.
+
+
+29.10.24 code2 day7
+Today i continued working on the Astreoid tasc following the videos from EIA2.
