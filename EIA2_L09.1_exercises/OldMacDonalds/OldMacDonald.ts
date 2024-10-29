@@ -1,3 +1,5 @@
+namespace OldMacDonald {
+
 class Animal {
     type: string;
     name: string;
@@ -22,20 +24,7 @@ class Animal {
     }
 }
 
-class Food {
-    stock: number;
-    type: string;
 
-    constructor(_stock: number, _type: string) {
-        this.stock = _stock;
-        this.type = _type;
-    }
-    updateStock(_stock: number): number {
-        this.stock = this.stock- _stock 
-        return this.stock
-    }
-
-}
 
 const foodSilo: Food[] = [
     new Food(500, "hay"),
@@ -57,4 +46,6 @@ for (let index: number = 0; index < stable.length; index++) {
     console.log(animal.name)
     animal.eat()
     animal.sing()
+}
+
 }
