@@ -3,7 +3,7 @@ namespace L09_Asteroids {
 
     export let crc2: CanvasRenderingContext2D;
 
-    let asteroids: Asteroid[] = [];
+    let moveables: Moveable[] = [];
 
     function handleLoad(_event: Event): void {
         console.log("Asteroids starting");
@@ -28,6 +28,15 @@ namespace L09_Asteroids {
 
         window.setInterval(upadte, 20)
 
+        function shootProjectile(_event: MouseEvent): void{
+            console.log("shoot projectile");
+            let origin: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
+            let velocity: Vector = new Vector(0, 0);
+            velocity.random(100, 100);
+            let projectile: Projectile = new Projectile(origin, velocity);
+            moveables.push(projectile);
+        }
+
         function shootLaser(_event: MouseEvent): void {
             console.log("Shoot laser");
             let hotspot: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
@@ -38,9 +47,9 @@ namespace L09_Asteroids {
         }
 
         function getAsteroidHit(_hotspot: Vector): Asteroid | null {
-            for (let asteroid of asteroids) {
-                if (asteroid.isHit(_hotspot))
-                    return asteroid;
+            for (let moveable of moveables) {
+                if (moveable instanceof Asteroid && moveable.isHit(_hotspot))
+                    return moveable;
             }
             return null
         }
@@ -50,19 +59,19 @@ namespace L09_Asteroids {
                 for (let i: number = 0; i < 2; i++) {
                     let fragment: Asteroid = new Asteroid(_asteroid.size / 2, _asteroid.position);
                     fragment.velocity.add(_asteroid.velocity); 
-                    asteroids.push(fragment);
+                    moveables.push(fragment);
                 }
             }
 
-            let index: number = asteroids.indexOf(_asteroid)
-            asteroids.splice(index, 1)
+            let index: number = moveables.indexOf(_asteroid)
+            moveables.splice(index, 1)
         }
 
         function createAsteroids(_nAsteroids: number): void {
             console.log("Create asteroids");
             for (let i: number = 0; i < _nAsteroids; i++) {
                 let asteroid: Asteroid = new Asteroid(1.0);
-                asteroids.push(asteroid);
+                moveables.push(asteroid);
             }
         }
 
@@ -70,11 +79,10 @@ namespace L09_Asteroids {
             console.log("Update");
             crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-            for (let asteroid of asteroids) {
-                asteroid.moveBy(1 / 50);
-                asteroid.draw();
+            for (let moveable of moveables) {
+                moveable.moveBy(1 / 50);
+                moveable.draw();
             }
-
             //ship.draw();
             //handleCollision();
         }

@@ -1,6 +1,6 @@
 namespace L09_Asteroids {
 
-    export class Asteroid {
+    export class Moveable {
         position: Vector;
          velocity: Vector;
          type: number;

@@ -1,7 +1,7 @@
 "use strict";
 var L09_Asteroids;
 (function (L09_Asteroids) {
-    class Asteroid {
+    class Moveable {
         constructor(_size, _position) {
             console.log("Asteroid constructor");
             if (_position)
@@ -43,5 +43,5 @@ var L09_Asteroids;
             return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize);
         }
     }
-    L09_Asteroids.Asteroid = Asteroid;
+    L09_Asteroids.Moveable = Moveable;
 })(L09_Asteroids || (L09_Asteroids = {}));
