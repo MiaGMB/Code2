@@ -61,4 +61,17 @@ also trough the help of his videos. I also catched up my diary.
 
 
 29.10.24 code2 day7
-Today i continued working on the Astreoid tasc following the videos from EIA2.
+Today i continued working on the Astreoid tasc following the videos from EIA2. We also got our next tasc
+it was about claas inheritance. You can compare it to the evulution tree. You have a special Class and their subclasses.
+For example you have the Class Dog witch has ist supclasses (dog races) Dogge, Wienerdog and more.
+they all have things in comman because they are all dogs, but every supclas has extra atributes.
+A Wienerdog dor axample has short legs and is smaaler then de Dogge.
+
+The inheritance task was to add subclasses to the Animal class in our Old Mac Donalds project.
+Every animal should get a extra special move the other animals dont have. I started to mace a diagram
+for the class and supclasses so that i can picture and understand it a bit better.
+
+
+30.10.24
+Today i continued withe the Old Mac donald inheritance tasc. I startet implementing the things i wrote download
+into the code. I also continued with the astroid project and followed the video to implement teh ufos into the code.
