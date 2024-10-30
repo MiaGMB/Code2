@@ -1,8 +1,9 @@
 "use strict";
 var L09_Asteroids;
 (function (L09_Asteroids) {
-    class Asteroid {
+    class Asteroid extends L09_Asteroids.Moveable {
         constructor(_size, _position) {
+            super(_position);
             console.log("Asteroid constructor");
             if (_position)
                 this.position = _position.copy();

@@ -1,13 +1,16 @@
 namespace L09_Asteroids {
 
-    export class Asteroid {
+    export class Asteroid extends Moveable {
         position: Vector;
          velocity: Vector;
          type: number;
         size: number;
 
         constructor(_size: number, _position?: Vector) {
+            super(_position)
+
             console.log("Asteroid constructor");
+
             if (_position)
                 this.position = _position.copy();
             else
