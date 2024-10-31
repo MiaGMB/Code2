@@ -80,3 +80,4 @@ into the code. I also continued with the astroid project and followed the video 
 31.10.24
 Today i again continue on the Astroid project and finished L10.2. I also started working on the next tasc, the solar system.
 I started creating the diagrams for the solar system and made the setup ort de documents.
+
