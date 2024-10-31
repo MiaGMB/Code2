@@ -24,7 +24,45 @@ class Animal {
     }
 }
 
+class Horse extends Animal {
+    jump: string
 
+    constructor(_type: string, _name: string, _sound: string, _food: Food, _jump: string){
+        super(_type, _name, _sound, _food,)
+    }
+}
+
+class Cow extends Animal {
+    milk: string
+
+    constructor(_type: string, _name: string, _sound: string, _food: Food, _milk: string){
+        super(_type, _name, _sound, _food,)
+    }
+}
+
+class Chickan extends Animal {
+    egg: string
+
+    constructor(_type: string, _name: string, _sound: string, _food: Food, _egg: string){
+        super(_type, _name, _sound, _food,)
+    }
+}
+
+class Cat extends Animal {
+    scratch: string
+
+    constructor(_type: string, _name: string, _sound: string, _food: Food, _scratch: string){
+        super(_type, _name, _sound, _food,)
+    }
+}
+
+class Dog extends Animal {
+    rollOver: string
+
+    constructor(_type: string, _name: string, _sound: string, _food: Food, _rollOver: string){
+        super(_type, _name, _sound, _food,)
+    }
+}
 
 const foodSilo: Food[] = [
     new Food(500, "hay"),
