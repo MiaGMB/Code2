@@ -74,4 +74,7 @@ for the class and supclasses so that i can picture and understand it a bit bette
 
 30.10.24
 Today i continued withe the Old Mac donald inheritance tasc. I startet implementing the things i wrote download
-into the code. I also continued with the astroid project and followed the video to implement teh ufos into the code.
+into the code. I also continued with the astroid project and followed the video to implement teh moveables and projectiles into the code.
+
+
+31.10.24
