@@ -16,7 +16,7 @@ var L09_Asteroids;
         console.log("Asteroids paths: ", L09_Asteroids.asteroidPaths);
         createAsteroids(5);
         //createShip();
-        // canvas.addEventListener("mousedown", loadLaser);
+        canvas.addEventListener("mousedown", shootProjectile);
         canvas.addEventListener("mouseup", shootLaser);
         // canvas.addEventListener("keypress" handleKeypress);
         // canvas.addEventListener("mousemove" setHeading);
@@ -26,7 +26,7 @@ var L09_Asteroids;
             let origin = new L09_Asteroids.Vector(_event.clientX - L09_Asteroids.crc2.canvas.offsetLeft, _event.clientY - L09_Asteroids.crc2.canvas.offsetTop);
             let velocity = new L09_Asteroids.Vector(0, 0);
             velocity.random(100, 100);
-            let projectile = new Projectile(origin, velocity);
+            let projectile = new L09_Asteroids.Projectile(origin, velocity);
             moveables.push(projectile);
         }
         function shootLaser(_event) {

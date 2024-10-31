@@ -3,6 +3,7 @@ namespace L09_Asteroids {
     export class Moveable {
         position: Vector;
         velocity: Vector;
+        expandable: boolean = true;
 
         constructor(_position?: Vector) {
             // console.log("Moveable constructor");
