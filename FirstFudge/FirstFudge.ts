@@ -20,7 +20,7 @@ namespace FirstFudge {
 
         const material: F.Material = new F.Material("Material", F.ShaderLit);
         const cmpMaterial: F.ComponentMaterial = new F.ComponentMaterial(material);
-        cmpMaterial.clrPrimary.set(1, 0, 0, 5);
+        cmpMaterial.clrPrimary.set(0, 0, 2, 1);
         node.addComponent(cmpMaterial);
 
         camera.mtxPivot.translateZ(5);
@@ -29,19 +29,26 @@ namespace FirstFudge {
         const cmpTransform: F.ComponentTransform = new F.ComponentTransform();
         node.addComponent(cmpTransform);
         //node.getComponent(F.ComponentTransform).mtxLocal.translateX(2);
-        node.mtxLocal.translateX(2);
+        node.mtxLocal.translateX(1);
 
         console.log(camera);
 
         const viewport: F.Viewport = new F.Viewport();
         viewport.initialize("Viewport", node, camera, canvas);
         viewport.draw();
+        globalViewport = viewport;
 
         F.Loop.start();
+        F.Time.game.setScale(0.5);
     }
 
     function moveCube(): void{
-        node.mtxLocal.rotateY(1);
+        const frameInMillieSeconds: number = F.Loop.timeFrameGame;
+        const frameInSeconds: number = (frameInMillieSeconds/ 1000);
+        const degrees: number = 360 * frameInSeconds;
+        node.mtxLocal.rotateY(degrees);
+        
         globalViewport.draw();
+
     }
 }
