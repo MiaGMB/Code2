@@ -16,6 +16,31 @@ var OldMacDonald;
             console.log(this.sound + " Old Mac Donald had a Farm");
         }
     }
+    class Horse extends Animal {
+        constructor(_type, _name, _sound, _food, _jump) {
+            super(_type, _name, _sound, _food);
+        }
+    }
+    class Cow extends Animal {
+        constructor(_type, _name, _sound, _food, _milk) {
+            super(_type, _name, _sound, _food);
+        }
+    }
+    class Chickan extends Animal {
+        constructor(_type, _name, _sound, _food, _egg) {
+            super(_type, _name, _sound, _food);
+        }
+    }
+    class Cat extends Animal {
+        constructor(_type, _name, _sound, _food, _scratch) {
+            super(_type, _name, _sound, _food);
+        }
+    }
+    class Dog extends Animal {
+        constructor(_type, _name, _sound, _food, _rollOver) {
+            super(_type, _name, _sound, _food);
+        }
+    }
     const foodSilo = [
         new OldMacDonald.Food(500, "hay"),
         new OldMacDonald.Food(120, "corn"),

@@ -2,6 +2,7 @@
 var L09_Asteroids;
 (function (L09_Asteroids) {
     window.addEventListener("load", handleLoad);
+    L09_Asteroids.lineWidth = 2;
     let moveables = [];
     function handleLoad(_event) {
         console.log("Asteroids starting");
@@ -11,6 +12,7 @@ var L09_Asteroids;
         L09_Asteroids.crc2 = canvas.getContext("2d");
         L09_Asteroids.crc2.fillStyle = "black";
         L09_Asteroids.crc2.strokeStyle = "white";
+        L09_Asteroids.crc2.lineWidth = L09_Asteroids.lineWidth;
         L09_Asteroids.crc2.fillRect(0, 0, L09_Asteroids.crc2.canvas.width, L09_Asteroids.crc2.canvas.height);
         L09_Asteroids.createPaths();
         console.log("Asteroids paths: ", L09_Asteroids.asteroidPaths);
@@ -45,15 +47,14 @@ var L09_Asteroids;
             return null;
         }
         function breakAsteroid(_asteroid) {
-            if (asteroid.size > 0.3) {
+            if (_asteroid.size > 0.3) {
                 for (let i = 0; i < 2; i++) {
                     let fragment = new L09_Asteroids.Asteroid(_asteroid.size / 2, _asteroid.position);
                     fragment.velocity.add(_asteroid.velocity);
                     moveables.push(fragment);
                 }
             }
-            let index = moveables.indexOf(_asteroid);
-            moveables.splice(index, 1);
+            _asteroid.expandable = true;
         }
         function createAsteroids(_nAsteroids) {
             console.log("Create asteroids");
@@ -63,16 +64,21 @@ var L09_Asteroids;
             }
         }
         function upadte() {
-            console.log("Update");
+            // console.log("Update");
             L09_Asteroids.crc2.fillRect(0, 0, L09_Asteroids.crc2.canvas.width, L09_Asteroids.crc2.canvas.height);
             for (let moveable of moveables) {
                 moveable.moveBy(1 / 50);
                 moveable.draw();
             }
+            deleteExpandables();
             //ship.draw();
             //handleCollision();
+            console.log("Moveable length: ", moveables.length);
         }
-        let asteroid = new L09_Asteroids.Asteroid(1);
-        console.log(asteroid);
+        function deleteExpandables() { }
+        for (let i = moveables.length - 1; i >= 0; i--) {
+            if (moveables[i].expandable)
+                moveables.splice(i, 1);
+        }
     }
 })(L09_Asteroids || (L09_Asteroids = {}));

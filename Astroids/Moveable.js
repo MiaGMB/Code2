@@ -3,6 +3,7 @@ var L09_Asteroids;
 (function (L09_Asteroids) {
     class Moveable {
         constructor(_position) {
+            this.expandable = true;
             // console.log("Moveable constructor");
             if (_position)
                 this.position = _position.copy();
