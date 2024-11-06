@@ -1,13 +1,11 @@
 namespace L09_Asteroids {
-
     export class Projectile extends Moveable {
-        lifetime: number;
+        lifetime: number = 2;
 
         constructor(_position: Vector, _velocity: Vector) {
             super(_position)
 
-            console.log("Asteroid constructor");
-
+            console.log("Asteroid constructor");    
             this.velocity = _velocity.copy();
 
         }
@@ -16,7 +14,7 @@ namespace L09_Asteroids {
             console.log(" Asteroid draw");
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
-            crc2.strokeRect(-1, -1, 1, 1);
+            crc2.strokeRect(-2, -2, 2, 2);
             crc2.restore();
         }
 
