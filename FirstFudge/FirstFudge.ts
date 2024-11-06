@@ -1,54 +1,80 @@
 namespace FirstFudge {
-    import F = FudgeCore;
+    import f = FudgeCore;
 
-    const node: F.Node = new F.Node("Node");
+    const nodeCar: f.Node = new f.Node("Node");
+    const nodeGround: f.Node = new f.Node("NodeGround");
 
     window.addEventListener("load", start);
-    let globalViewport: F.Viewport;
-
-    F.Loop.addEventListener(F.EVENT.LOOP_FRAME, moveCube);
+    let viewport: f.Viewport;
 
     function start(_event: Event): void {
         const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
+        
+        const camera: f.ComponentCamera = new f.ComponentCamera();
 
-        const mesh: F.MeshCube = new F.MeshCube("cube");
+        //car
+        const mesh: f.MeshCube = new f.MeshCube("cube");
 
-        const camera: F.ComponentCamera = new F.ComponentCamera();
+        const cmpMesh: f.ComponentMesh = new f.ComponentMesh(mesh);
+        cmpMesh.mtxPivot.translateY(0.5);
+        cmpMesh.mtxPivot.scaleZ(4);
+        nodeCar.addComponent(cmpMesh);
 
-        const cmpMesh: F.ComponentMesh = new F.ComponentMesh(mesh);
-        node.addComponent(cmpMesh);
+        const material: f.Material = new f.Material("Material", f.ShaderLit);
+        const cmpMaterial: f.ComponentMaterial = new f.ComponentMaterial(material);
+        cmpMaterial.clrPrimary.set(0, 0, 1, 1);
+        nodeCar.addComponent(cmpMaterial);
 
-        const material: F.Material = new F.Material("Material", F.ShaderLit);
-        const cmpMaterial: F.ComponentMaterial = new F.ComponentMaterial(material);
-        cmpMaterial.clrPrimary.set(0, 0, 2, 1);
-        node.addComponent(cmpMaterial);
+        const cpmTransform: f.ComponentTransform = new f.ComponentTransform();
+        nodeCar.addComponent(cpmTransform);
 
-        camera.mtxPivot.translateZ(5);
-        camera.mtxPivot.rotateY(180)
+        //Ground
+        //Ground
+        const groundMesh: f.Mesh = new f.MeshQuad("Ground");
 
-        const cmpTransform: F.ComponentTransform = new F.ComponentTransform();
-        node.addComponent(cmpTransform);
-        //node.getComponent(F.ComponentTransform).mtxLocal.translateX(2);
-        node.mtxLocal.translateX(1);
+        const cmpGround: f.ComponentMesh = new f.ComponentMesh(groundMesh);
+        cmpGround.mtxPivot.rotateX(-90, true);
+        cmpGround.mtxPivot.scaleY(50);
+        cmpGround.mtxPivot.scaleX(50);
+        nodeGround.addComponent(cmpGround);
+
+        const groundMaterial: f.Material = new f.Material("Ground Material", f.ShaderLitTextured);
+        const cmpGroundMaterial: f.ComponentMaterial = new f.ComponentMaterial(groundMaterial);
+        nodeGround.addComponent(cmpGroundMaterial);
+        nodeGround.addChild(nodeCar);
+
+
+        camera.mtxPivot.translateZ(15);
+        camera.mtxPivot.translateY(15)
 
         console.log(camera);
 
-        const viewport: F.Viewport = new F.Viewport();
-        viewport.initialize("Viewport", node, camera, canvas);
-        viewport.draw();
-        globalViewport = viewport;
+        viewport = new f.Viewport();
+        viewport.initialize("Viewport", nodeGround, camera, canvas);
 
-        F.Loop.start();
-        F.Time.game.setScale(0.5);
+        f.Loop.addEventListener(f.EVENT.LOOP_FRAME, update);
+        f.Loop.start();
     }
 
-    function moveCube(): void{
-        const frameInMillieSeconds: number = F.Loop.timeFrameGame;
-        const frameInSeconds: number = (frameInMillieSeconds/ 1000);
-        const degrees: number = 360 * frameInSeconds;
-        node.mtxLocal.rotateY(degrees);
-        
-        globalViewport.draw();
+    function update(): void{
+        const tSpeed: number = 3 / 1; //units per seconds
+        const rSpeed: number = 360 / 3; // degrees per seconds
+        const frameTimeInMillieSeconds: number = f.Loop.timeFrameGame;
+        const frameTimeInSeconds: number = (frameTimeInMillieSeconds/ 1000);
+        // node.mtxLocal.rotate(degrees);
 
+        if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W]))
+            nodeCar.mtxLocal.translateZ(tSpeed * frameTimeInSeconds);
+        if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.S]))
+            nodeCar.mtxLocal.translateZ(-tSpeed * frameTimeInSeconds);
+
+        if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.D]))
+            nodeCar.mtxLocal.rotateY(rSpeed * frameTimeInSeconds);
+        if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.A]))
+            nodeCar.mtxLocal.rotateY(-rSpeed * frameTimeInSeconds);
+
+        viewport.camera.mtxPivot.lookAt(nodeCar.mtxWorld.translation);
+
+        viewport.draw();
     }
 }
