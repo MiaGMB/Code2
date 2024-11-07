@@ -1,10 +1,10 @@
 namespace SolarSystem {
-    export class Body extends f.Node{
+    export class Body extends f.Node {
         private static mesh: f.Mesh = new f.MeshSphere("Body");
         private static material: f.Material = new f.Material("Body", f.ShaderLit);
 
         // public name: String
-      //  public position: f.Vector3;
+        //  public position: f.Vector3;
 
         private size: number;
         private distance: number = 0;
@@ -12,11 +12,15 @@ namespace SolarSystem {
         private vRotation: number = 0;
         private cmpMash: f.ComponentMesh;
         private cmpMaterial: f.ComponentMaterial;
-        
-        public constructor (_name: string, _size: number, _color: string) {
+
+        public constructor(_name: string, _size: number, _color: string) {
             super(_name)
             this.name = _name;
             this.size = _size;
+
+            const tempMat: f.ComponentMaterial = new f.ComponentMaterial(Body.material);
+
+            tempMat.clrPrimary.setCSS(_color);
 
             this.cmpMash = new f.ComponentMesh(Body.mesh);
             this.cmpMaterial = new f.ComponentMaterial(Body.material);
@@ -28,5 +32,6 @@ namespace SolarSystem {
             this.vRotation = _vRotation / 1000 * (Math.PI / 180);
             this.distance = _distance;
         }
+
     }
 }

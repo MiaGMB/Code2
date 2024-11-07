@@ -3,18 +3,25 @@ var SolarSystem;
 (function (SolarSystem) {
     SolarSystem.f = FudgeCore;
     window.addEventListener("load", start);
-    const sun = new SolarSystem.f.Node("Sun");
+    let sun;
     let viewport;
     function start() {
+        sun = new SolarSystem.Body("Sun", 1, "yellow");
         const earth = new SolarSystem.Body("earth", 1, "blue");
-        sun.addChild(earth);
+        const rotationNode = new SolarSystem.f.Node("EarthRotation");
+        const rotationTransform = new SolarSystem.f.ComponentTransform();
+        rotationNode.addComponent(rotationTransform);
+        sun.addChild(rotationNode);
+        rotationNode.addChild(earth);
         console.log(earth);
         const canvas = document.querySelector("canvas");
         const camera = new SolarSystem.f.ComponentCamera();
         // camera.mtxPivot.translateZ(15);
         // camera.mtxPivot.translateY(15)
+        camera.mtxPivot.translateZ(-10);
         viewport = new SolarSystem.f.Viewport();
         viewport.initialize("Viewport", sun, camera, canvas);
+        viewport.draw();
         SolarSystem.f.Loop.addEventListener("loopFrame" /* f.EVENT.LOOP_FRAME */, update);
         SolarSystem.f.Loop.start();
     }

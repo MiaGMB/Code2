@@ -9,6 +9,8 @@ var SolarSystem;
             this.vRotation = 0;
             this.name = _name;
             this.size = _size;
+            const tempMat = new SolarSystem.f.ComponentMaterial(Body.material);
+            tempMat.clrPrimary.setCSS(_color);
             this.cmpMash = new SolarSystem.f.ComponentMesh(Body.mesh);
             this.cmpMaterial = new SolarSystem.f.ComponentMaterial(Body.material);
             super.addComponent(new SolarSystem.f.ComponentTransform());
