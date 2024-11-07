@@ -73,8 +73,10 @@ namespace FirstFudge {
         if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.A]))
             nodeCar.mtxLocal.rotateY(-rSpeed * frameTimeInSeconds);
 
+        const up: f.Vector3 = f.Vector3.Y();
         viewport.camera.mtxPivot.lookAt(nodeCar.mtxWorld.translation);
-
+        f.Recycler.store(up);
+        
         viewport.draw();
     }
 }

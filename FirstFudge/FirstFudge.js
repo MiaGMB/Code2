@@ -55,7 +55,9 @@ var FirstFudge;
             nodeCar.mtxLocal.rotateY(rSpeed * frameTimeInSeconds);
         if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.A]))
             nodeCar.mtxLocal.rotateY(-rSpeed * frameTimeInSeconds);
+        const up = f.Vector3.Y();
         viewport.camera.mtxPivot.lookAt(nodeCar.mtxWorld.translation);
+        f.Recycler.store(up);
         viewport.draw();
     }
 })(FirstFudge || (FirstFudge = {}));
