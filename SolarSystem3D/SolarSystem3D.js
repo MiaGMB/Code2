@@ -6,12 +6,13 @@ var SolarSystem;
     const sun = new SolarSystem.f.Node("Sun");
     let viewport;
     function start() {
-        const body = new SolarSystem.Body("sun", 1, "yellow");
-        console.log(body);
+        const earth = new SolarSystem.Body("earth", 1, "blue");
+        sun.addChild(earth);
+        console.log(earth);
         const canvas = document.querySelector("canvas");
         const camera = new SolarSystem.f.ComponentCamera();
-        camera.mtxPivot.translateZ(15);
-        camera.mtxPivot.translateY(15);
+        // camera.mtxPivot.translateZ(15);
+        // camera.mtxPivot.translateY(15)
         viewport = new SolarSystem.f.Viewport();
         viewport.initialize("Viewport", sun, camera, canvas);
         SolarSystem.f.Loop.addEventListener("loopFrame" /* f.EVENT.LOOP_FRAME */, update);

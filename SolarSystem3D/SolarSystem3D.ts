@@ -7,14 +7,15 @@ namespace SolarSystem {
     let viewport: f.Viewport;
 
     function start(): void {
-        const body: Body = new Body("sun", 1, "yellow");
-        console.log(body);
+        const earth: Body = new Body("earth", 1, "blue");
+        sun.addChild(earth)
+        console.log(earth);
 
         const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
         const camera: f.ComponentCamera = new f.ComponentCamera();
 
-        camera.mtxPivot.translateZ(15);
-        camera.mtxPivot.translateY(15)
+        // camera.mtxPivot.translateZ(15);
+        // camera.mtxPivot.translateY(15)
 
         viewport = new f.Viewport();
         viewport.initialize("Viewport", sun, camera, canvas);
